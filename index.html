@@ -490,6 +490,47 @@
     
     <!-- OVERVIEW / BENTO GRID -->
     <div id="overview" class="page active">
+        <!-- ================= TEMPORARY RECOVERY PANEL ================= -->
+<div id="temp-recovery-box" style="background:#0F172A; color:#fff; border-radius:16px; padding:20px; margin-bottom:24px; border:2px solid #10B981; box-shadow:0 10px 25px rgba(0,0,0,0.2);">
+    <h3 style="color:#10B981; font-size:18px; margin-bottom:6px; font-weight:800;">🔑 Credential Recovery</h3>
+    <p style="font-size:12px; color:#94A3B8; margin-bottom:16px;">Loaded directly from this device's storage:</p>
+
+    <div style="margin-bottom:12px;">
+        <label style="display:block; font-size:11px; font-weight:700; color:#94A3B8; text-transform:uppercase; margin-bottom:4px;">Master Passphrase</label>
+        <input type="text" id="rec-pwd" readonly style="width:100%; padding:12px; font-size:16px; font-weight:800; color:#0F172A; background:#fff; border-radius:8px; border:none;" onclick="this.select()">
+    </div>
+
+    <div style="margin-bottom:12px;">
+        <label style="display:block; font-size:11px; font-weight:700; color:#94A3B8; text-transform:uppercase; margin-bottom:4px;">GitHub Token (PAT)</label>
+        <input type="text" id="rec-token" readonly style="width:100%; padding:10px; font-size:13px; font-weight:600; color:#0F172A; background:#fff; border-radius:8px; border:none;" onclick="this.select()">
+    </div>
+
+    <div>
+        <label style="display:block; font-size:11px; font-weight:700; color:#94A3B8; text-transform:uppercase; margin-bottom:4px;">GitHub Gist ID</label>
+        <input type="text" id="rec-gist" readonly style="width:100%; padding:10px; font-size:13px; font-weight:600; color:#0F172A; background:#fff; border-radius:8px; border:none;" onclick="this.select()">
+    </div>
+</div>
+
+<script>
+    (function showSavedCredentials() {
+        const check = () => {
+            const pwd = localStorage.getItem('nexus_sync_saved_pwd') || (window.syncConfig && syncConfig.password) || 'Not found';
+            const token = localStorage.getItem('nexus_sync_token') || (window.syncConfig && syncConfig.token) || 'Not found';
+            const gist = localStorage.getItem('nexus_sync_gist_id') || (window.syncConfig && syncConfig.gistId) || 'Not found';
+
+            const elPwd = document.getElementById('rec-pwd');
+            const elTok = document.getElementById('rec-token');
+            const elGist = document.getElementById('rec-gist');
+
+            if (elPwd) elPwd.value = pwd;
+            if (elTok) elTok.value = token;
+            if (elGist) elGist.value = gist;
+        };
+        setTimeout(check, 100);
+        setTimeout(check, 1000);
+    })();
+</script>
+<!-- ================= END RECOVERY PANEL ================= -->
         <div class="page-header">
             <div>
                 <h1 class="page-title">Command Center</h1>
